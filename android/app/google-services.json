@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1017100145475",
+    "firebase_url": "https://coronastats-9c889.firebaseio.com",
+    "project_id": "coronastats-9c889",
+    "storage_bucket": "coronastats-9c889.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017100145475:android:3bf70ef97d33a2146395f6",
+        "android_client_info": {
+          "package_name": "co.ashleyalexjacob.coronastats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017100145475-vh77gkbjrrptp784mhm26fcbf0e7mg1v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxqDRindHGWNFuSTgYW5jlrIs7gXtfdOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017100145475-vh77gkbjrrptp784mhm26fcbf0e7mg1v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
