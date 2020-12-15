@@ -3,27 +3,25 @@ import 'package:coronastats/ui/custom_field.dart';
 import 'package:coronastats/constants.dart';
 import 'package:coronastats/screens/signin.dart';
 import 'package:coronastats/services/firebaseHelper.dart';
+import 'package:provider/provider.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:coronastats/screens/main_Screen.dart';
+
 class SignUp extends StatefulWidget {
   static String id = 'third';
-  FirebaseHelper helper;
-  SignUp({this.helper});
+
   @override
   _SignUpState createState() => _SignUpState();
 }
 
 class _SignUpState extends State<SignUp> {
   String email;
-  String pass;
-  bool checkedValue=false;
-  bool showSpinner=false;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+  String pass;
+
+  bool checkedValue=false;
+
+  bool showSpinner=false;
 
   void checkToggle(bool cv){
     if(cv==false)
@@ -38,6 +36,7 @@ class _SignUpState extends State<SignUp> {
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +49,7 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
+
   _body(){
     return SafeArea(
       child: Column(
@@ -80,6 +80,7 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
+
   _textForm(){
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15),
@@ -88,12 +89,12 @@ class _SignUpState extends State<SignUp> {
           Text('Register',style: TextStyle(color: kColor1,fontSize: 35,fontFamily: 'Mukta',fontWeight: FontWeight.w600),),
           CustomField(text: 'Enter your Email Address',hideText: false,
             onValue: (val){
-            email=val;
+              email=val;
             },),
           SizedBox(height:10.0 ,),
           CustomField(text: 'Password',hideText: true,
             onValue: (val){
-            pass=val;
+              pass=val;
             },),
           SizedBox(height:10.0 ,),
           Row(
@@ -128,16 +129,16 @@ class _SignUpState extends State<SignUp> {
               setState(() {
                 showSpinner=true;
               });
-              var user= await widget.helper.signUp(email, pass);
-              if(user!=null){
-                print(user.email);
-                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>MainScreen(helper: widget.helper,)));
-              }
+             String user = await context.read<FirebaseHelper>().signUp(email, pass);
+               if(user=='signed up'){
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>MainScreen()));
+               }
               else
                 print('User Registration Failed');
               setState(() {
                 showSpinner=false;
-              });
+              }
+              );
             },
             child: Container(
               height: 40.0,
@@ -154,6 +155,7 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
+
   _otherMethods(){
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -163,10 +165,12 @@ class _SignUpState extends State<SignUp> {
         SizedBox(width: 5,),
         GestureDetector(
           onTap: (){
-            Navigator.push(context,MaterialPageRoute(builder: (BuildContext context)=> SignIn(helper: widget.helper,)));
+            Navigator.push(context,MaterialPageRoute(builder: (BuildContext context)=> SignIn()));
           },
           child: Text('Sign In',style: TextStyle(color: kColor1,fontSize: 18,fontFamily: 'Mukta',fontWeight: FontWeight.w600),),)
       ],
     );
   }
 }
+
+

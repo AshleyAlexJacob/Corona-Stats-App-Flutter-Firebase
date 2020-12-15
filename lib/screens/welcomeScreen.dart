@@ -2,37 +2,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:coronastats/constants.dart';
 import 'package:coronastats/screens/signin.dart';
-import 'package:coronastats/services/firebaseHelper.dart';
-class WelcomeScreen extends StatefulWidget {
-  static String id='fourth';
-  final FirebaseHelper helper;
-  WelcomeScreen({this.helper});
+class WelcomeScreen extends StatelessWidget {
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
-}
-
-class _WelcomeScreenState extends State<WelcomeScreen> {
-
-@override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: kColor4,
-      body: _body() ,
+      body: _body(context) ,
     );
   }
 
-_body(){
+  _body(BuildContext context){
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         _logoMark(),
         _textArea(),
-        _buttonArea(),
+        _buttonArea(context),
       ],
     );
-}
+  }
 
-_logoMark(){
+  _logoMark(){
     return Center(
       child: Container(
         margin: EdgeInsets.all(30),
@@ -47,9 +37,9 @@ _logoMark(){
         ),
       ),
     );
-}
+  }
 
-_textArea(){
+  _textArea(){
     return Column(
       children: <Widget>[
         Text('CORONA VIRUS',style: TextStyle(color: kColor1,fontSize: 40,fontFamily: 'Mukta',fontWeight: FontWeight.w800,letterSpacing: 2.5,),),
@@ -58,9 +48,9 @@ _textArea(){
         SizedBox(height: 20,),
       ],
     );
-}
+  }
 
-_buttonArea(){
+  _buttonArea(BuildContext context){
     return RawMaterialButton(
       shape: CircleBorder(),
       fillColor: kColor1,
@@ -70,18 +60,10 @@ _buttonArea(){
       ) ,
       child: Center(child: Icon(Icons.arrow_forward_ios,color: kColor4,size: 60,)),
       onPressed: (){
-  Navigator.push(context,MaterialPageRoute(builder: (BuildContext context)=>SignIn(helper: widget.helper)));
-  },
-//        bool res = await FirebaseHelper().isUserLogged();
-//        if(res!=null)
-//          {
-//            Navigator.pushNamed(context, MainScreen.id);
-//          }
-//        else{
-//          Navigator.pushNamed(context, SignIn.id);
-//        },
-
-
+        Navigator.push(context,MaterialPageRoute(builder: (BuildContext context)=>SignIn()));
+      },
     );
-}
-}
+  }
+  }
+
+

@@ -27,15 +27,16 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.3
+  cupertino_icons: ^1.0.0
   http: ^0.12.2
   intl: ^0.16.1
-  google_maps_flutter: ^0.5.28+1
-  firebase_core: ^0.4.0+9
-  firebase_auth: ^0.14.0+5
-  cloud_firestore: ^0.12.9+5
+  google_maps_flutter: ^1.0.6
+  firebase_core: ^0.5.1
+  firebase_auth: ^0.18.2
+  cloud_firestore: ^0.14.2
   modal_progress_hud: ^0.1.3
-  url_launcher: ^5.5.0
+  provider: ^4.3.2+2
+  url_launcher: ^5.7.10
   mailto: ^1.0.0
 
 dev_dependencies:
@@ -72,6 +73,24 @@ flutter:
        fonts:
          - asset: fonts/Mukta-Regular.ttf
          - asset: fonts/Mukta-SemiBold.ttf
+
+     - family: PopR
+       fonts:
+         - asset: fonts/Poppins-Regular.ttf
+
+     - family: PopM
+       fonts:
+         - asset: fonts/Poppins-Medium.ttf
+
+     - family: PopS
+       fonts:
+         - asset: fonts/Poppins-SemiBold.ttf
+
+     - family: PopB
+       fonts:
+         - asset: fonts/Poppins-Bold.ttf
+  
+         
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

@@ -6,10 +6,8 @@ import 'package:coronastats/screens/signup.dart';
 import 'package:coronastats/screens/main_Screen.dart';
 import 'package:coronastats/services/firebaseHelper.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-
+import 'package:provider/provider.dart';
 class SignIn extends StatefulWidget {
-  final FirebaseHelper helper;
-  SignIn({this.helper});
   static String id = 'second';
   @override
   _SignInState createState() => _SignInState();
@@ -131,10 +129,10 @@ class _SignInState extends State<SignIn> {
               setState(() {
                 showSpinner=true;
               });
-              var userIn=await widget.helper.signIn(email, pass);
-              if(userIn!=null){
+             String userIn = await  context.read<FirebaseHelper>().signIn(email, pass);
+              if(userIn=='signed in'){
                 print('User In');
-                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> MainScreen(helper: widget.helper,)));
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> MainScreen()));
               }
               else
                 print('User Login Failed');
@@ -166,7 +164,7 @@ class _SignInState extends State<SignIn> {
         SizedBox(width: 5,),
         GestureDetector(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> SignUp(helper: widget.helper)));
+            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> SignUp()));
           },
           child: Text('Sign Up',style: TextStyle(color: kColor1,fontSize: 18,fontFamily: 'Mukta',fontWeight: FontWeight.w600),))
       ],

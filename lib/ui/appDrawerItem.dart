@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
-class AppDrawerItem extends StatefulWidget {
+
+class AppDrawerItem extends StatelessWidget {
   final IconData mark;
   final String text;
-  final String route;
-  AppDrawerItem({@required this.text,@required this.mark,this.route});
-
-  @override
-  _AppDrawerItemState createState() => _AppDrawerItemState();
-}
-
-class _AppDrawerItemState extends State<AppDrawerItem> {
+  final Widget route;
+  AppDrawerItem({this.text, this.mark, this.route});
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(widget.mark,color: Colors.white,),
-      title: Text(widget.text.toUpperCase(),style: TextStyle(color: Colors.white),),
-      onTap: (){
+      leading: Icon(
+        mark,
+        color: Colors.white,
+      ),
+      title: Text(
+        text.toUpperCase(),
+        style: TextStyle(color: Colors.white, fontFamily: 'PopM', fontSize: 15),
+      ),
+      onTap: () {
         Navigator.pop(context);
-        Navigator.pushNamed(context, widget.route);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) => route));
       },
     );
   }
