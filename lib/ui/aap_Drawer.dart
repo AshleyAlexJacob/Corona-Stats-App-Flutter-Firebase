@@ -1,11 +1,11 @@
 import 'package:coronastats/screens/aboutMe.dart';
 import 'package:coronastats/screens/faqScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:coronastats/constants.dart';
 import 'package:coronastats/ui/appDrawerItem.dart';
 import 'package:coronastats/screens/main_Screen.dart';
 import 'package:coronastats/ui/map.dart';
-import 'package:coronastats/screens/inProgress.dart';
 import 'package:coronastats/screens/precautions.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -23,7 +23,9 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             AppDrawerItem(
-              mark: Icons.map,
+              mark:
+                  //Icons.map
+                  CupertinoIcons.map_fill,
               text: 'Map',
               route: AppMap(),
             ),

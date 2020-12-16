@@ -7,6 +7,7 @@ import 'package:coronastats/screens/main_Screen.dart';
 import 'package:coronastats/services/firebaseHelper.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
+
 class SignIn extends StatefulWidget {
   static String id = 'second';
   @override
@@ -14,29 +15,28 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-
   String email;
   String pass;
-  bool showSpinner=false;
-  bool checkedValue=false;
+  bool showSpinner = false;
+  bool checkedValue = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
-  void checkToggle(bool cv){
-    if(cv==false)
-      {
-        setState(() {
-          checkedValue=true;
-        });
-      }
-    else if(cv==true){
+
+  void checkToggle(bool cv) {
+    if (cv == false) {
       setState(() {
-        checkedValue=false;
+        checkedValue = true;
+      });
+    } else if (cv == true) {
+      setState(() {
+        checkedValue = false;
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,21 +49,21 @@ class _SignInState extends State<SignIn> {
       ),
     );
   }
-  _body(){
+
+  _body() {
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           _logo(),
-        _textForm(),
-        _otherMethods(),
-
+          _textForm(),
+          _otherMethods(),
         ],
       ),
     );
   }
 
-  _logo(){
+  _logo() {
     return Center(
       child: Container(
         margin: EdgeInsets.all(30),
@@ -79,65 +79,94 @@ class _SignInState extends State<SignIn> {
       ),
     );
   }
-  _textForm(){
+
+  _textForm() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         children: <Widget>[
-          Text('Welcome!',style: TextStyle(color: kColor1,fontSize: 35,fontFamily: 'Mukta',fontWeight: FontWeight.w600),),
-          CustomField(text: 'Enter your Email Address',hideText: false,
-            onValue: (ea){
-            email=ea;
-            },),
-          SizedBox(height:10.0 ,),
-          CustomField(text: 'Password',hideText: true,
-          onValue: (password){
-            pass=password;
-          },),
-          SizedBox(height:10.0 ,),
+          Text(
+            'Welcome!',
+            style: TextStyle(
+                color: kColor1,
+                fontSize: 35,
+                fontFamily: 'Mukta',
+                fontWeight: FontWeight.w600),
+          ),
+          CustomField(
+            text: 'Enter your Email Address',
+            hideText: false,
+            onValue: (ea) {
+              email = ea;
+            },
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+          CustomField(
+            text: 'Password',
+            hideText: true,
+            onValue: (password) {
+              pass = password;
+            },
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              // Flexible(
+              //   child: Theme(
+              //     data: ThemeData(
+              //       unselectedWidgetColor: Colors.white,
+              //     ),
+
+              //     child: CheckboxListTile(
+
+              //       title: Text('Remember',style: TextStyle(color: Colors.white,fontSize: 14.3),),
+              //       checkColor: kColor4,
+              //       activeColor: Colors.white,
+
+              //       value: checkedValue,
+              //       onChanged: (value){
+              //        checkToggle(checkedValue);
+              //       },
+              //       controlAffinity: ListTileControlAffinity.leading,
+
+              //     ),
+              //   ),
+              // ),
               Flexible(
-                child: Theme(
-                  data: ThemeData(
-                    unselectedWidgetColor: Colors.white,
-                  ),
-
-                  child: CheckboxListTile(
-
-                    title: Text('Remember',style: TextStyle(color: Colors.white,fontSize: 14.3),),
-                    checkColor: kColor4,
-                    activeColor: Colors.white,
-
-                    value: checkedValue,
-                    onChanged: (value){
-                     checkToggle(checkedValue);
-                    },
-                    controlAffinity: ListTileControlAffinity.leading,
-
-                  ),
-                ),
-              ),
-              Flexible(child: Text('Forgot your password?',style: TextStyle(color: Colors.white,decoration: TextDecoration.underline,
-              fontSize: 14.3),))
+                  child: Text(
+                'Forgot your password?',
+                style: TextStyle(
+                    color: Colors.white,
+                    decoration: TextDecoration.underline,
+                    fontSize: 14.3),
+              ))
             ],
           ),
-          SizedBox(height:10.0 ,),
+          SizedBox(
+            height: 10.0,
+          ),
           GestureDetector(
-            onTap: ()async{
+            onTap: () async {
               setState(() {
-                showSpinner=true;
+                showSpinner = true;
               });
-             String userIn = await  context.read<FirebaseHelper>().signIn(email, pass);
-              if(userIn=='signed in'){
+              String userIn =
+                  await context.read<FirebaseHelper>().signIn(email, pass);
+              if (userIn == 'signed in') {
                 print('User In');
-                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> MainScreen()));
-              }
-              else
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => MainScreen()));
+              } else
                 print('User Login Failed');
               setState(() {
-                showSpinner=false;
+                showSpinner = false;
               });
             },
             child: Container(
@@ -147,26 +176,50 @@ class _SignInState extends State<SignIn> {
                 color: kColor1,
                 borderRadius: BorderRadius.circular(20.0),
               ),
-              child: Center(child: Text('Sign In',textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 18),)),
+              child: Center(
+                  child: Text(
+                'Sign In',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              )),
             ),
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
         ],
       ),
     );
   }
-  _otherMethods(){
+
+  _otherMethods() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text('Do not have an account?',style: TextStyle(color: Colors.white,fontSize: 18,fontFamily: 'Mukta'),),
-        SizedBox(width: 5,),
+        Text(
+          'Do not have an account?',
+          style:
+              TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Mukta'),
+        ),
+        SizedBox(
+          width: 5,
+        ),
         GestureDetector(
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> SignUp()));
-          },
-          child: Text('Sign Up',style: TextStyle(color: kColor1,fontSize: 18,fontFamily: 'Mukta',fontWeight: FontWeight.w600),))
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => SignUp()));
+            },
+            child: Text(
+              'Sign Up',
+              style: TextStyle(
+                  color: kColor1,
+                  fontSize: 18,
+                  fontFamily: 'Mukta',
+                  fontWeight: FontWeight.w600),
+            ))
       ],
     );
   }
